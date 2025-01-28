@@ -6,6 +6,7 @@ import { render } from '../test/utils'
 import { Username } from './Username'
 import {
   InvalidCountryCode,
+  LongName,
   UnverifiedSupporter,
   Verified,
   VerifiedSupporter,
@@ -38,5 +39,12 @@ describe('Username', () => {
   it('shows a verified badge when the user is verified and also a supporter', () => {
     const { getByTestId } = render(<Username {...VerifiedSupporter.args} />)
     expect(getByTestId('Username: verified badge')).toBeInTheDocument()
+  })
+
+  it('shows a trimmed username when the user has a long name', () => {
+    const { getByText } = render(<Username {...LongName.args} />)
+    const usernameElement = getByText('a-very-long-long-long-username')
+    expect(usernameElement).toHaveStyle('overflow: hidden')
+    expect(usernameElement).toHaveStyle('text-overflow: ellipsis')
   })
 })

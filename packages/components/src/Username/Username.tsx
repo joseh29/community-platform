@@ -3,6 +3,7 @@ import { Flex, Text } from 'theme-ui'
 import flagUnknownSVG from '../../assets/icons/flag-unknown.svg'
 import { FlagIconLibrary } from '../FlagIcon/FlagIcon'
 import { InternalLink } from '../InternalLink/InternalLink'
+import { Tooltip } from '../Tooltip/Tooltip'
 import { twoCharacterCountryCodes } from './TwoCharacterCountryCodes'
 import { UserBadge } from './UserBadge'
 
@@ -59,9 +60,23 @@ export const Username = ({ user, sx, target, isLink = true }: IProps) => {
         )}
       </Flex>
 
-      <Text sx={{ color: 'black' }}>{userName}</Text>
+      <Text
+        sx={{
+          color: 'black',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          maxWidth: '100%',
+        }}
+        data-tooltip-id="username-tooltip"
+        data-tooltip-content={userName}
+      >
+        {userName}
+      </Text>
       {isVerified && <UserBadge badgeName="verified" />}
       {isSupporter && <UserBadge badgeName="supporter" />}
+
+      <Tooltip id="username-tooltip" />
     </Flex>
   )
 

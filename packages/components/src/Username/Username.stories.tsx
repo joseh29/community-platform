@@ -78,3 +78,11 @@ export const InlineStyles = {
     },
   },
 }
+
+export const LongName = {
+  args: {
+    user: {
+      userName: 'a-very-long-long-long-username',
+    },
+  },
+}
